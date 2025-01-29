@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        window.onload = function () {
+            var questionnaireID = new URLSearchParams(window.location.search).get("questionnaireID") || "1";
+
+            // Custom app URL
+            var appURL = "yourapp://open?questionnaireID=" + questionnaireID;
+
+            // Web fallback URL
+            var webURL = "https://jacky-schfr.github.io/questionnaire-site/?questionnaireID=" + questionnaireID;
+
+            // Try opening the app
+            window.location.href = appURL;
+
+            // If the app isn't installed, go to the website after 2 seconds
+            setTimeout(function () {
+                window.location.href = webURL;
+            }, 2000);
+        };
+    </script>
+</head>
+<body>
+    <h1>Redirecting...</h1>
+    <p>If you are not redirected, <a id="manual-link" href="#">click here</a>.</p>
+
+    <script>
+        document.getElementById("manual-link").href = "https://jacky-schfr.github.io/questionnaire-site/?questionnaireID=" + 
+            new URLSearchParams(window.location.search).get("questionnaireID");
+    </script>
+</body>
+</html>
