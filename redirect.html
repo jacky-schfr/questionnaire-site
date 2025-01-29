@@ -8,25 +8,37 @@
         window.onload = function () {
             var questionnaireID = new URLSearchParams(window.location.search).get("questionnaireID") || "1";
 
-            // Custom app URL
-            var appURL = "https://apps.apple.com/de/app/testflight/id899247664";
+            // App deep link
+            var appURL = "yourapp://open?questionnaireID=" + questionnaireID;
 
-            // Web fallback URL
+            // Store URLs
+            var appStoreURL = "https://apps.apple.com/de/app/testflight/id899247664"; // Replace with actual iOS App Store URL
+            var playStoreURL = "https://play.google.com/store/apps/details?id=com.yourapp"; // Replace with actual Android Play Store URL
+
+            // Fallback website
             var webURL = "https://jacky-schfr.github.io/questionnaire-site/?questionnaireID=" + questionnaireID;
 
-            // Try opening the app
+            // Try to open the app
             window.location.href = appURL;
 
-            // If the app isn't installed, go to the website after 2 seconds
+            // After 2 seconds, check if user is still here (meaning the app didn't open)
             setTimeout(function () {
-                window.location.href = webURL;
+                var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+                if (/android/i.test(userAgent)) {
+                    window.location.href = playStoreURL;
+                } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                    window.location.href = appStoreURL;
+                } else {
+                    window.location.href = webURL;
+                }
             }, 2000);
         };
     </script>
 </head>
 <body>
     <h1>Redirecting...</h1>
-    <p>If you are not redirected, <a id="manual-link" href="#">click here</a>.</p>
+    <p>If nothing happens, <a id="manual-link" href="#">click here</a>.</p>
 
     <script>
         document.getElementById("manual-link").href = "https://jacky-schfr.github.io/questionnaire-site/?questionnaireID=" + 
@@ -34,3 +46,4 @@
     </script>
 </body>
 </html>
+
