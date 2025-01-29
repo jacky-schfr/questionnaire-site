@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire Loader</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        #content { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Loading Questionnaire...</h1>
+    <div id="content">Fetching data...</div>
+
+    <script>
+        // Simulated JSON data
+        const questionnaireData = {
+            "1": {
+                "id": 1,
+                "title": "Test Questionnaire",
+                "description": "A sample questionnaire for testing."
+            }
+        };
+
+        // Function to get URL parameter
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Fetch and display questionnaire
+        const questionnaireID = getQueryParam("questionnaireID");
+        const contentDiv = document.getElementById("content");
+
+        if (questionnaireID && questionnaireData[questionnaireID]) {
+            const data = questionnaireData[questionnaireID];
+            contentDiv.innerHTML = `<h2>${data.title}</h2><p>${data.description}</p>`;
+        } else {
+            contentDiv.innerHTML = "<p>Questionnaire not found.</p>";
+        }
+    </script>
+</body>
+</html>
