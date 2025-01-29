@@ -39,6 +39,22 @@
         } else {
             contentDiv.innerHTML = "<p>Questionnaire not found.</p>";
         }
-    </script>
+        
+  var questionnaireID = new URLSearchParams(window.location.search).get("questionnaireID") || "1";
+
+  // App custom scheme
+  var appURL = "yourapp://open?questionnaireID=" + questionnaireID;
+
+  // Web fallback
+  var webURL = "https://jacky-schfr.github.io/questionnaire-site/?questionnaireID=" + questionnaireID;
+
+  // Try opening the app
+  window.location.href = appURL;
+
+  // If app isn't installed, redirect to the website after 2 seconds
+  setTimeout(function() {
+      window.location.href = webURL;
+  }, 2000);
+</script>
 </body>
 </html>
