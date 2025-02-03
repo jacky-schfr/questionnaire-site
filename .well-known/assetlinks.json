@@ -1,7 +1,7 @@
 [{
   "relation": ["delegate_permission/common.handle_all_urls"],
   "target": {
-    "namespace": "com.example.questionaire",
+    "namespace": "android_app",
     "package_name": "de.mugs.questionnaire",
     "sha256_cert_fingerprints":
     ["48:1E:BB:BA:56:D3:01:EE:C4:BB:15:D1:74:38:C5:A1:90:E9:26:28:1C:D4:B6:C4:11:D2:C2:E7:7D:41:7E:36"]
